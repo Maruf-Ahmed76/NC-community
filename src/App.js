@@ -2,15 +2,16 @@ import React from 'react';
 import Home from './components/Home';
 import {
   Switch,
-  Route
+  Route,
+  match
 } from "react-router-dom";
 import About from './components/About';
 import Error from './components/404';
-import SearchResult from './components/SearchResult';
+import Search from './components/Search';
 
 function App() {
   return (
-    <div className='app container d-flex flex-column justify-content-between'>
+    <div className='app d-flex flex-column justify-content-between'>
       <Switch>
 
         <Route exact path="/">
@@ -22,8 +23,8 @@ function App() {
         </Route>
 
         
-        <Route path="/search">
-          <SearchResult/>
+        <Route path='/search'>
+          <Search/>
         </Route>
         
         <Error/>

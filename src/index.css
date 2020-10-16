@@ -1,18 +1,29 @@
 body{
   font-family: 'Open Sans', sans-serif!important;
 }
+
+.bg-primary-custom {
+  background:  #5F89FF!important;
+}
+
 .app{
   height: 100vh!important;
 }
-.nav,footer{
-  background-color: #C3C4C3;
+.navbar-brand img{
+  width: 50px;
 }
+.nav-link.active{
+  color: #5F89FF!important;
+}
+/* footer,.navbar{
+  background-color: #ffb703!important;
+} */
 .nav-link,footer a {
   font-weight:  600!important;
 }
 .community_college_list{
-  max-height: 200px;
-  overflow-y: scroll;
+  /* max-height: 200px; */
+  /* overflow-y: scroll; */
 }
 .search-result-table{
   max-height: 300px;
