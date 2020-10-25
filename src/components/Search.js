@@ -1,58 +1,62 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState} from 'react'
 import Header from './lib/Header';
 import Footer from './lib/Footer';
-import SearchResult from './utils/SearchResults';
-import SearchForm from './utils/SearchForm';
-import axios from 'axios'
 
 const Search = () => {
 
-    let [searchQuery, setSearchQuery] = useState({
-        id : '',
-        year : '2020',
-        semester : 'Fall',
-        type : 'Online'
-    })
-    let [resultPage, setResultPage] = useState(0);
-    let [searchData, setSearchData] = useState([]);
-
-    // Fetching data
-    useEffect(() => {
-        if(resultPage){
-            let course = searchQuery.id.toUpperCase().split(' ');
-            console.log(course)
-            axios.get("http://localhost:3000/cccourse/find",{
-                params : {
-                    "ClassID" : course[1],
-                    "CourseSubject" : course[0],
-                    "classType" : searchQuery.type
-                }
-            })
-            .then(res => {
-                setSearchData(res.data);
-                console.log(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        }
-    },[resultPage])
+    let [saveResults, setSaveResults] = useState(JSON.parse(localStorage.getItem("saveResult")));
+    
+    let handleClear = () => {
+        localStorage.removeItem('saveResult');
+        let updateSaveResult = JSON.parse(localStorage.getItem("saveResult"));
+        setSaveResults(updateSaveResult);
+    }
 
     return (
         <>
             <Header/>
-                {
-                    resultPage == 0 ? (
-                        <SearchForm 
-                            searchQuery = {searchQuery}
-                            setSearchQuery = {setSearchQuery}
-                            setResultPage = {setResultPage}
-                        />
-                    ) : 
-                    (
-                        <SearchResult searchQuery = {searchQuery} searchData = {searchData} setSearchQuery = {setSearchQuery} setResultPage = {setResultPage}/>
-                    )
-                }
+            <div className="container search-query px-2 px-sm-3">
+                <div className="search-result-table table-responsive-lg my-4">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Name of Community college</th>
+                            <th scope="col">Course ID</th>
+                            <th scope="col">Credit</th>
+                            <th scope="col">Course description</th>
+                            <th scope="col">Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        {
+                            saveResults && saveResults.length > 0 ? saveResults.map (item => {
+                                return (
+                                    <tr key={item._id}>
+                                        <th>{item.College}</th>
+                                        <td>{`${item.CourseSubject} ${item.ClassID}`}</td>
+                                        <td>{item.Credits}</td>
+                                        <td>Course description</td>
+                                        <td>$1000</td>
+                                    </tr>
+
+                                )
+                            }):
+                            (
+                                <tr>
+                                    <th>No Save Data</th>
+                                </tr>
+                            )
+                        }
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className="d-flex mb-5">
+                    <button className="btn text-light bg-primary-custom mr-2" onClick={handleClear}>Clear</button>
+                </div>
+            </div>
             <Footer/>
             
         </>

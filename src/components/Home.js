@@ -1,17 +1,59 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from './lib/Header';
 import Footer from './lib/Footer';
+import SearchForm from "./utils/SearchForm";
+import SearchResult from "./utils/SearchResults";
+import axios from "axios";
 
 const Home = () => {
+    let [searchQuery, setSearchQuery] = useState({
+        id : '',
+        year : '2020',
+        semester : 'Fall',
+        type : 'Online'
+    })
+    let [resultPage, setResultPage] = useState(0);
+    let [searchData, setSearchData] = useState([]);
+
+    // Fetching data
+    useEffect(() => {
+        if(resultPage){
+            let course = searchQuery.id.toUpperCase().split(' ');
+            console.log(course)
+            axios.get("http://localhost:3000/cccourse/find",{
+                params : {
+                    "ClassID" : course[1],
+                    "CourseSubject" : course[0],
+                    "classType" : searchQuery.type,
+                    "year" : searchQuery.year,
+                    "semester" : searchQuery.semester
+                }
+            })
+                .then(res => {
+                    setSearchData(res.data);
+                    console.log(res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+    },[resultPage])
 
     return (
         <>
             <Header/>
-
-                <div className="container">
-                    <h1 className="text-center">NC Community College</h1>
-                </div>
-
+            {
+                resultPage == 0 ? (
+                        <SearchForm
+                            searchQuery = {searchQuery}
+                            setSearchQuery = {setSearchQuery}
+                            setResultPage = {setResultPage}
+                        />
+                    ) :
+                    (
+                        <SearchResult searchQuery = {searchQuery} searchData = {searchData} setSearchQuery = {setSearchQuery} setResultPage = {setResultPage}/>
+                    )
+            }
             <Footer/>
             
         </>

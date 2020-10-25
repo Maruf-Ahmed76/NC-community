@@ -54,7 +54,7 @@ function SearchForm(props) {
                     <div className="col-sm-8">
                         <select id="semester" name="semester" className="form-control" value={searchQuery.semester} onChange={handleChange}>
                             <option value="Summer">Summer</option>
-                            <option value="Sall">Fall</option>
+                            <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                         </select>
                     </div>
