@@ -65,11 +65,11 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
                 <table className="table">
                     <thead>
                         <tr>
-                        <th scope="col">Name of Community college</th>
-                        <th scope="col">Course ID</th>
-                        <th scope="col">Credit</th>
-                        <th scope="col">Course description</th>
-                        <th scope="col">Cost</th>
+                            <th scope="col">Name of Community college</th>
+                            <th scope="col">Course ID</th>
+                            <th scope="col">Credit</th>
+                            <th scope="col">Course description</th>
+                            <th scope="col">Cost</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,9 +89,9 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
                         }):
                         searchData == null ?
                         (
-                            <tr className="spinner-border" role="status">
-                                <td>
-                                    <div >
+                            <tr>
+                                <td colSpan="5" align="center">
+                                    <div className="spinner-border" role="status">
                                         <span className="sr-only">Loading...</span>
                                     </div>
                                 </td>

@@ -1,9 +1,12 @@
 import React,{useState} from 'react'
 import Header from './lib/Header';
 import Footer from './lib/Footer';
+import Modal from './lib/Modal'
 
 const Search = () => {
-
+    let [selectedCollege, setSelectedCollege] = useState({
+        College : ""
+    });
     let [saveResults, setSaveResults] = useState(JSON.parse(localStorage.getItem("saveResult")));
     
     let handleClear = () => {
@@ -33,7 +36,7 @@ const Search = () => {
                             saveResults && saveResults.length > 0 ? saveResults.map (item => {
                                 return (
                                     <tr key={item._id}>
-                                        <th>{item.College}</th>
+                                        <th type="button" data-toggle="modal" data-target="#exampleModal" onClick={() => setSelectedCollege(item)}>{item.College}</th>
                                         <td>{`${item.CourseSubject} ${item.ClassID}`}</td>
                                         <td>{item.Credits}</td>
                                         <td>Course description</td>
@@ -56,7 +59,9 @@ const Search = () => {
                 <div className="d-flex mb-5">
                     <button className="btn text-light bg-primary-custom mr-2" onClick={handleClear}>Clear</button>
                 </div>
+                
             </div>
+            <Modal selectedCollege={selectedCollege}/>
             <Footer/>
             
         </>
