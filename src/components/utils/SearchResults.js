@@ -1,7 +1,12 @@
-import React,{useRef} from 'react';
+import React,{useRef, useState} from 'react';
+import Modal from '../lib/Modal';
 
-function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData}) {
+function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSearchData}) {
     
+    let [selectedCollege, setSelectedCollege] = useState({
+        College : ""
+    });
+
     let handleClick = () => {
         setSearchQuery({
             id : '',
@@ -11,6 +16,7 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData}) {
         })
         
         setResultPage(0);
+        setSearchData(null);
     }
     
     let handleSave = () => {
@@ -72,7 +78,7 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData}) {
                         searchData && searchData.length > 0 ? searchData.map (item => {
                             return (
                                 <tr key={item._id}>
-                                    <th>{item.College}</th>
+                                    <th type="button" data-toggle="modal" data-target="#exampleModal" onClick={() => setSelectedCollege(item)}>{item.College}</th>
                                     <td>{`${item.CourseSubject} ${item.ClassID}`}</td>
                                     <td>{item.Credits}</td>
                                     <td>Course description</td>
@@ -81,9 +87,20 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData}) {
 
                             )
                         }):
+                        searchData == null ?
+                        (
+                            <tr className="spinner-border" role="status">
+                                <td>
+                                    <div >
+                                        <span className="sr-only">Loading...</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        )
+                        : 
                         (
                             <tr>
-                                <th>No result...</th>
+                                <td>No Result Found...</td>
                             </tr>
                         )
                     }
@@ -96,6 +113,8 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData}) {
                 <button className="btn text-light bg-primary-custom mr-2" onClick={handleSave}>Save Result</button>
                 <button className="btn text-light bg-primary-custom mr-2" onClick={handlePrint}>Download Pdf</button>
             </div>
+            
+            <Modal selectedCollege={selectedCollege}/>
         </div>
     );
 }

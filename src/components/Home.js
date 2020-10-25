@@ -13,7 +13,7 @@ const Home = () => {
         type : 'Online'
     })
     let [resultPage, setResultPage] = useState(0);
-    let [searchData, setSearchData] = useState([]);
+    let [searchData, setSearchData] = useState(null);
 
     // Fetching data
     useEffect(() => {
@@ -22,7 +22,6 @@ const Home = () => {
             console.log(course)
             axios.get("http://localhost:3000/cccourse/find",{
                 params : {
-                    "ClassID" : course[1],
                     "CourseSubject" : course[0],
                     "classType" : searchQuery.type,
                     "year" : searchQuery.year,
@@ -43,7 +42,7 @@ const Home = () => {
         <>
             <Header/>
             {
-                resultPage == 0 ? (
+                resultPage === 0 ? (
                         <SearchForm
                             searchQuery = {searchQuery}
                             setSearchQuery = {setSearchQuery}
@@ -51,7 +50,7 @@ const Home = () => {
                         />
                     ) :
                     (
-                        <SearchResult searchQuery = {searchQuery} searchData = {searchData} setSearchQuery = {setSearchQuery} setResultPage = {setResultPage}/>
+                        <SearchResult searchQuery = {searchQuery} searchData = {searchData} setSearchQuery = {setSearchQuery} setResultPage = {setResultPage} setSearchData={setSearchData}/>
                     )
             }
             <Footer/>
