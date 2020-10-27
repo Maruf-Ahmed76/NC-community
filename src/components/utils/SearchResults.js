@@ -33,7 +33,6 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
         win.document.write(tableRef.current.outerHTML);
         win.document.close();
         win.print();
-        console.log(tableRef.current);
     }
 
     return (
