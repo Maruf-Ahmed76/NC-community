@@ -18,7 +18,17 @@ router.route('/college').get((req, res) => {
 
 // handles get request for /courses/find/ URL path
 router.route('/find').get((req, res) => {
-  ComColCourse.find({CourseSubject: req.query.CourseSubject, Location : req.query.classType, Year : req.query.year, Semester : req.query.semester})
+  let classType = req.query.classType;
+  let location = classType && classType === "All" ? {$in: ["Online", "Ofline"]} : classType;
+
+  let searchQuery = {
+    CourseSubject: req.query.CourseSubject, 
+    Location : location, 
+    Year : req.query.year, 
+    Semester : req.query.semester
+  }
+
+  ComColCourse.find(searchQuery)
       .then(course => res.json(course))
       .catch(err => res.status(400).json('Error: ' + err));
   }
