@@ -81,7 +81,7 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
                                     <td>{`${item.CourseSubject} ${item.ClassID}`}</td>
                                     <td>{item.Credits}</td>
                                     <td>Course description</td>
-                                    <td>$1000</td>
+                                    <td>${item.Credits * 76}</td>
                                 </tr>
 
                             )
