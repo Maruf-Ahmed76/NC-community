@@ -9,6 +9,7 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
 
     let handleClick = () => {
         setSearchQuery({
+            id_cat : 'courseId',
             id : [],
             year : '2020',
             semester : 'Fall',

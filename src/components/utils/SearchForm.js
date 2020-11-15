@@ -40,16 +40,22 @@ function SearchForm(props) {
                 <h5 className="text-center mb-3">Please enter the following information to get start</h5>
 
                 <div className="form-group row w-75">
-                    <label htmlFor="courseId" className="col-sm-4 col-form-label">Course ID</label>
-                    <div className="col-sm-8">
+
+                    <select name="id_cat" className="col-md-4 form-control mb-3 mb-md-0 border-none" value={searchQuery.selectIdCat} onChange={handleChange}>
+                        <option value="courseId">Course ID</option>
+                        <option value="uncgId">Uncg ID</option>
+                    </select>
+
+                    {/* <label htmlFor="courseId" className="col-md-4 col-form-label">Course ID</label> */}
+                    <div className="col-md-8">
                         <TagsInput inputProps={{placeholder : " "}} value={searchQuery.id} onChange={onCourseChanged} />
                         {/* <input className="form-control" id="courseId" name="id" value={searchQuery.id} onChange={handleChange}/> */}
                     </div>
                 </div>
 
                 <div className="form-group row w-75">
-                    <label htmlFor="academicYear" className="col-sm-4 col-form-label">Academic year</label>
-                    <div className="col-sm-8">
+                    <label htmlFor="academicYear" className="col-md-4 col-form-label">Academic year</label>
+                    <div className="col-md-8">
                         <select id="academicYear" name="year" className="form-control" value={searchQuery.year} onChange={handleChange}>
                             <option value="2020">2020</option>
                             <option value="2019">2019</option>
@@ -60,8 +66,8 @@ function SearchForm(props) {
                 </div>
 
                 <div className="form-group row w-75">
-                    <label htmlFor="semester" className="col-sm-4 col-form-label">Semester</label>
-                    <div className="col-sm-8">
+                    <label htmlFor="semester" className="col-md-4 col-form-label">Semester</label>
+                    <div className="col-md-8">
                         <select id="semester" name="semester" className="form-control" value={searchQuery.semester} onChange={handleChange}>
                             <option value="Summer">Summer</option>
                             <option value="Fall">Fall</option>
@@ -71,8 +77,8 @@ function SearchForm(props) {
                 </div>
 
                 <div className="form-group row w-75">
-                    <label htmlFor="courseType" className="col-sm-4 col-form-label">Type of course</label>
-                    <div className="col-sm-8">
+                    <label htmlFor="courseType" className="col-md-4 col-form-label">Type of course</label>
+                    <div className="col-md-8">
                         <select id="courseType" name="type" className="form-control" value={searchQuery.type} onChange={handleChange}>
                             <option value="All">All</option>
                             <option value="Online">Online</option>

@@ -21,13 +21,15 @@ router.route('/find').get((req, res) => {
     let classType = req.query.classType;
     let location = classType && classType === "All" ? {$exists : true} : classType;
     let courses = req.query.CourseSubject.map(course => course.toUpperCase());
-    // console.log(courses);
+    let searchCourse = req.query.id_cat == "courseId" ? {CourseSubject: { $in: courses}} : {UncgID : {$in : courses}} ;
+
     let searchQuery = {
-      CourseSubject: { $in: courses}, 
+      ...searchCourse, 
       Location : location, 
       Year : req.query.year, 
       Semester : req.query.semester
     }
+    // console.log(searchQuery)
     
     ComColCourse.find(searchQuery)
         .then(course => res.json(course))

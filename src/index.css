@@ -28,6 +28,7 @@ body{
 
 .react-tagsinput{
   border-radius: .25rem;
+  padding-top: unset!important;
 }
 .react-tagsinput--focused{
   color: #495057;
@@ -39,6 +40,8 @@ body{
 .react-tagsinput-tag{
   background: #5F89FF!important;
   color: #fff!important;
+  margin-bottom: unset!important;
+  padding: 2px 4px!important;
 }
 .react-tagsinput-tag a{
   color: #fff!important;
@@ -46,4 +49,7 @@ body{
 }
 .react-tagsinput-input,.react-tagsinput-tag,.react-tagsinput-tag a{
   font-size: 1rem!important;
+}
+.react-tagsinput-input{
+  margin-bottom: unset!important;
 }

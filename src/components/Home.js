@@ -7,6 +7,7 @@ import axios from "axios";
 
 const Home = () => {
     let [searchQuery, setSearchQuery] = useState({
+        id_cat : 'courseId',
         id : [],
         year : '2020',
         semester : 'Fall',
@@ -20,6 +21,7 @@ const Home = () => {
         if(resultPage){
             axios.get("http://localhost:3000/cccourse/find",{
                 params : {
+                    "id_cat" : searchQuery.id_cat,
                     "CourseSubject" : searchQuery.id,
                     "classType" : searchQuery.type,
                     "year" : searchQuery.year,
