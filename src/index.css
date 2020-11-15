@@ -21,11 +21,29 @@ body{
 .nav-link,footer a {
   font-weight:  600!important;
 }
-.community_college_list{
-  /* max-height: 200px; */
-  /* overflow-y: scroll; */
-}
 .search-result-table{
   max-height: 300px;
   overflow-y: scroll;
+}
+
+.react-tagsinput{
+  border-radius: .25rem;
+}
+.react-tagsinput--focused{
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff!important;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+.react-tagsinput-tag{
+  background: #5F89FF!important;
+  color: #fff!important;
+}
+.react-tagsinput-tag a{
+  color: #fff!important;
+  text-decoration: none!important;
+}
+.react-tagsinput-input,.react-tagsinput-tag,.react-tagsinput-tag a{
+  font-size: 1rem!important;
 }

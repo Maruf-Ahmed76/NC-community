@@ -1,14 +1,23 @@
 import React from 'react';
+import TagsInput from 'react-tagsinput'
+import 'react-tagsinput/react-tagsinput.css'
 
 function SearchForm(props) {
 
     let {searchQuery ,setSearchQuery, setResultPage} = props;
 
     let handleChange = e => {
-        const {name , value} = e.target
+        const {name , value} = e.target;
         setSearchQuery( prevState => ({
             ...prevState,
             [name] : value
+        }))
+    }
+
+    const onCourseChanged = (value) => {
+        setSearchQuery( prevState => ({
+            ...prevState,
+            id : value
         }))
     }
 
@@ -33,7 +42,8 @@ function SearchForm(props) {
                 <div className="form-group row w-75">
                     <label htmlFor="courseId" className="col-sm-4 col-form-label">Course ID</label>
                     <div className="col-sm-8">
-                        <input className="form-control" id="courseId" name="id" value={searchQuery.id} onChange={handleChange}/>
+                        <TagsInput inputProps={{placeholder : " "}} value={searchQuery.id} onChange={onCourseChanged} />
+                        {/* <input className="form-control" id="courseId" name="id" value={searchQuery.id} onChange={handleChange}/> */}
                     </div>
                 </div>
 

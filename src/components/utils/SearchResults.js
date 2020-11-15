@@ -9,7 +9,7 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
 
     let handleClick = () => {
         setSearchQuery({
-            id : '',
+            id : [],
             year : '2020',
             semester : 'Fall',
             type : 'Online'

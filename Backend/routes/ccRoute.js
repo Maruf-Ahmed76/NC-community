@@ -18,19 +18,20 @@ router.route('/college').get((req, res) => {
 
 // handles get request for /courses/find/ URL path
 router.route('/find').get((req, res) => {
-  let classType = req.query.classType;
-  let location = classType && classType === "All" ? {$exists : true} : classType;
-
-  let searchQuery = {
-    CourseSubject: req.query.CourseSubject, 
-    Location : location, 
-    Year : req.query.year, 
-    Semester : req.query.semester
-  }
-
-  ComColCourse.find(searchQuery)
-      .then(course => res.json(course))
-      .catch(err => res.status(400).json('Error: ' + err));
+    let classType = req.query.classType;
+    let location = classType && classType === "All" ? {$exists : true} : classType;
+    let courses = req.query.CourseSubject.map(course => course.toUpperCase());
+    // console.log(courses);
+    let searchQuery = {
+      CourseSubject: { $in: courses}, 
+      Location : location, 
+      Year : req.query.year, 
+      Semester : req.query.semester
+    }
+    
+    ComColCourse.find(searchQuery)
+        .then(course => res.json(course))
+        .catch(err => res.status(400).json('Error: ' + err));
   }
 );
 
