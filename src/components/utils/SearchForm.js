@@ -22,7 +22,7 @@ function SearchForm(props) {
     }
 
     const handleSearch = () => {
-        if(searchQuery.id && searchQuery.year && searchQuery.semester && searchQuery.type){
+        if(searchQuery.id.length && searchQuery.year && searchQuery.semester && searchQuery.type){
             setResultPage(1);
         }else{
             setResultPage(0);
